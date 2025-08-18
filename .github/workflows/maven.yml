@@ -1,0 +1,19 @@
+name: Java CI         # The name of the workflow, visible in GitHub Actions tab
+
+on: [push, pull_request]   # Triggers workflow when you push code or open a PR
+
+jobs:
+  build:                    # Define a job named "build"
+    runs-on: ubuntu-latest  # Run it on GitHub's Ubuntu virtual machine
+
+    steps:
+    - uses: actions/checkout@v4  # Step 1: Checkout (download) your repository code
+
+    - name: Set up JDK 17         # Step 2: Install Java 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'   # Java distribution (Temurin = Eclipse Adoptium)
+        java-version: '17'        # Version of Java
+
+    - name: Build with Maven      # Step 3: Run Maven tests
+      run: mvn test
